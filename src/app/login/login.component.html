@@ -1,0 +1,43 @@
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+      <!--Grid column-->
+      <div class="col-md-5 mb-4">
+
+        <!--Card-->
+        <div class="card mb-4">
+
+          <!--Card content-->
+          <div class="card-body">
+
+            <form class="form-signin" (ngSubmit)="onSubmit()">
+              <h1 class="h3 mb-3 font-weight-normal">Войдите в систему</h1>
+              <label for="inputUsername" class="sr-only">Логин</label>
+              <input type="text" id="inputUsername" [(ngModel)]="user.username" name="username"
+                     class="form-control" placeholder="Логин" required autofocus style="margin-bottom: 10px">
+              <label for="inputPassword" class="sr-only">Пароль</label>
+              <input type="password" id="inputPassword" [(ngModel)]="user.password" name="password"
+                     class="form-control" placeholder="Пароль" required>
+              <br/>
+              <div>
+                <button class="btn btn-primary" type="submit" style="margin-left: 0px;">Войти</button>
+                <a (click)="onRestore()">Забыли пароль?</a>
+              </div>
+              <br/>
+              <a (click)="onRegistration()">Зарегистрироваться</a>
+            </form>
+
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+  </div>
+</main>

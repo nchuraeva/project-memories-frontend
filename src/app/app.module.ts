@@ -8,19 +8,27 @@ import {HelloService} from "./services/hello.service";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
+import {AppRoutingModule} from "./app-routing.module";
+import {LoginComponent} from "./login/login.component";
+import {AuthService} from "./services/auth.service";
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
-    HelloService
+    HelloService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
