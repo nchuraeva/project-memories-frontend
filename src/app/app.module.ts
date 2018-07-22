@@ -11,6 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {LoginComponent} from "./login/login.component";
 import {AuthService} from "./services/auth.service";
+import {AuthServiceGuard} from "./services/auth-service.guard";
 
 
 
@@ -18,7 +19,7 @@ import {AuthService} from "./services/auth.service";
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import {AuthService} from "./services/auth.service";
   ],
   providers: [
     HelloService,
-    AuthService
+    AuthService,
+    AuthServiceGuard
   ],
   bootstrap: [AppComponent]
 })
