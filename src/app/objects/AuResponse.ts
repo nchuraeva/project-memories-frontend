@@ -1,4 +1,4 @@
-export class AutResponse {
+export class AuResponse {
   access_token: string;
   refresh_token: string;
   username: string;

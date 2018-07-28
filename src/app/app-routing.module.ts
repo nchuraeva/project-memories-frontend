@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {HeaderComponent} from "./header/header.component";
+import {AuthServiceGuard} from "./services/auth-service.guard";
 
 
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'hello',
-    component: HeaderComponent
+    component: HeaderComponent,
+    canActivate: [AuthServiceGuard]
   }
 ];
 

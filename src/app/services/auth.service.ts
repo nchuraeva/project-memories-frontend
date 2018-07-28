@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {User} from "../objects/User";
 import {environment} from "../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AutResponse} from "../objects/AutResponse";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {AuResponse} from "../objects/AuResponse";
 import { Router} from '@angular/router';
 
 @Injectable()
@@ -13,7 +13,9 @@ export class AuthService {
   private accessToken;
   private refreshToken;
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http:HttpClient, private router:Router) {
+    this.refreshAuthData();
+  }
 
 
   authenticate(user: User) {
@@ -32,7 +34,7 @@ export class AuthService {
       })
     };
 
-    this.http.post<AutResponse>(url, body.toString(), httpOptions)
+    this.http.post<AuResponse>(url, body.toString(), httpOptions)
       .subscribe(response => {
         this.doAuth(response);
         this.router.navigate(['/hello']);
@@ -45,8 +47,7 @@ export class AuthService {
 
   }
 
-  private doAuth(response: AutResponse) {
-    debugger;
+  doAuth(response: AuResponse) {
     localStorage.setItem('currentUser', JSON.stringify({
       userName: response.username,
       token: response.access_token,
@@ -59,6 +60,7 @@ export class AuthService {
     let user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       this.user = user["userName"];
+      // В oauth
       this.accessToken = user["token"];
       this.refreshToken = user["refresh_token"];
     }
@@ -66,5 +68,35 @@ export class AuthService {
 
   isAuth() {
     return this.accessToken != null;
+  }
+
+  logout() {
+    let logoutUrl = this.authUrl + "/revoke-token";
+    this.http.get<Object>(logoutUrl).subscribe( response => {
+      localStorage.removeItem('currentUser');
+      this.accessToken = null;
+      this.refreshToken = null;
+      this.user = null;
+      this.router.navigateByUrl("/login");
+    });
+  }
+
+  getAuthToken() {
+    return this.accessToken;
+  }
+
+  doRefreshToken() {
+    let url = this.authUrl;
+    const body = new URLSearchParams();
+    body.set('refresh_token', this.refreshToken);
+    body.set('grant_type', 'refresh_token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': "application/x-www-form-urlencoded",
+        'Authorization': "Basic " + btoa(environment.clientId+":"+environment.clientSecret)
+      })
+    };
+    return this.http.post<AuResponse>(url, body.toString(), httpOptions);
+
   }
 }

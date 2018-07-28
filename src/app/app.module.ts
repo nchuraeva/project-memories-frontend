@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import {HelloService} from "./services/hello.service";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from "./app-routing.module";
 import {LoginComponent} from "./login/login.component";
 import {AuthService} from "./services/auth.service";
 import {AuthServiceGuard} from "./services/auth-service.guard";
+import {RequestInterceptorService} from "./services/request-interceptor.service";
 
 
 
@@ -30,7 +31,12 @@ import {AuthServiceGuard} from "./services/auth-service.guard";
   providers: [
     HelloService,
     AuthService,
-    AuthServiceGuard
+    AuthServiceGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
