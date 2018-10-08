@@ -1,4 +1,10 @@
-<p>
-  {{greetings}}
-</p>
-<button (click)="logout()">Logout</button>
+<header>
+  <div class="header-left">
+    <div class="logo"></div>
+    <span>Welcome, {{ currentUser }}</span>
+  </div>
+  <div class="header-right">
+    <button type="button" (click)="logout()">Logout</button>
+  </div>
+</header>
+

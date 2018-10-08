@@ -10,6 +10,7 @@ import {AuthService} from "../services/auth.service";
 export class HeaderComponent implements OnInit {
 
   greetings: String;
+  private currentUser: String;
 
   constructor(private helloService:HelloService, private authService:AuthService) {
     this.greetings = "Hello";
@@ -18,7 +19,12 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      this.currentUser = user["userName"];
+    }
+  }
 
   logout() {
     this.authService.logout();

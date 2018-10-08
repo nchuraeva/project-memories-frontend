@@ -4,11 +4,14 @@ import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {AuResponse} from "../objects/AuResponse";
 import { Router} from '@angular/router';
+import {Observable} from "rxjs/Observable";
+import {ResponseBoolean} from "../objects/ResponseBoolean";
 
 @Injectable()
 export class AuthService {
 
   private authUrl = environment.oauthServerUrl;
+  private restApiUrl = environment.restApiUrl;
   private user;
   private accessToken;
   private refreshToken;
@@ -20,6 +23,7 @@ export class AuthService {
 
   authenticate(user: User) {
 
+    debugger;
     let url = this.authUrl + "/oauth/token";
 
     const body = new URLSearchParams();
@@ -37,13 +41,10 @@ export class AuthService {
     this.http.post<AuResponse>(url, body.toString(), httpOptions)
       .subscribe(response => {
         this.doAuth(response);
-        this.router.navigate(['/hello']);
+        this.router.navigateByUrl("");
       }, (error) => {
-        //TODO: отображение ошибки
         console.log('error in', error);
       });
-
-    this.refreshAuthData();
 
   }
 
@@ -54,9 +55,11 @@ export class AuthService {
       refresh_token: response.refresh_token,
       roles: response.roles
     }));
+    this.refreshAuthData();
   }
 
   private refreshAuthData() {
+    debugger;
     let user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       this.user = user["userName"];
@@ -97,6 +100,22 @@ export class AuthService {
       })
     };
     return this.http.post<AuResponse>(url, body.toString(), httpOptions);
+
+  }
+
+  registerNewUser(newUser) : Observable<ResponseBoolean>{
+    let url = this.restApiUrl + "/register";
+    const headers = new HttpHeaders({
+      'Content-Type': "application/json",
+      'Authorization': "Basic " + btoa(environment.clientId + ":" + environment.clientSecret)
+    });
+
+
+    return this.http.put<ResponseBoolean>(url, JSON.stringify(newUser), {
+      headers: headers
+    });
+
+
 
   }
 }

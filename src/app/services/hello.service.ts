@@ -15,7 +15,7 @@ export class HelloService {
       'Authorization': "Basic " + btoa(environment.clientId + ":" + environment.clientSecret)
     });
 
-    return this.http.get("http://localhost:8082/api/home", { headers: headers } );
+    return this.http.get("http://localhost:8080/api/home", { headers: headers } );
   }
 
 }

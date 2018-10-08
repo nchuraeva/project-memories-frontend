@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  restApiUrl: 'http://localhost:8082',
+  restApiUrl: 'http://localhost:8080',
   oauthServerUrl: 'http://localhost:8081',
   clientId: 'clientId',
   clientSecret: 'secret'

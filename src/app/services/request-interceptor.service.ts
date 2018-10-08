@@ -34,6 +34,7 @@ export class RequestInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent
     | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
     console.log(req);
+    debugger;
     return next.handle(RequestInterceptorService.addToken(req, this.authService.getAuthToken()))
       .catch(error => {
         if (error instanceof HttpErrorResponse) {
