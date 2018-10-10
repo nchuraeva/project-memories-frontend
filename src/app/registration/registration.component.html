@@ -1,0 +1,63 @@
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
+
+    </div>
+    <!-- Heading -->
+
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+      <!--Grid column-->
+      <div class="col-md-5 mb-4">
+
+        <!--Card-->
+        <div class="card mb-4">
+
+          <!--Card content-->
+          <div class="card-body">
+
+            <form class="form-signin" (ngSubmit)="onRegistration()"  [formGroup]="registrationFormGroup">
+              <h1 class="h3 mb-3 font-weight-normal">Регистрация в системе</h1>
+              <label for="username" class="sr-only">Логин</label>
+              <input type="text" id="username" formControlName="username"
+                     class="form-control" placeholder="Логин" required autofocus style="margin-bottom: 10px">
+              <p class="bg-danger" *ngIf="registrationFormGroup.controls.username.errors?.required && registrationFormGroup.controls.username.touched">Введите пользователя</p>
+              <label for="email" class="sr-only">Почта</label>
+              <input type="email" id="email" formControlName="email"
+                     class="form-control" placeholder="Почта" required style="margin-top: 10px">
+              <p class="bg-danger" *ngIf="registrationFormGroup.controls.email.errors?.required && registrationFormGroup.controls.email.touched">Введите почту</p>
+              <div [formGroup]="passwordFormGroup" style="margin-top: 10px">
+                <label for="password" class="sr-only">Пароль</label>
+                <input type="password" id="password" formControlName="password"
+                       class="form-control" placeholder="Пароль" required style="margin-bottom: 10px">
+                <p class="bg-danger" *ngIf="passwordFormGroup.controls.password.errors?.required && passwordFormGroup.controls.password.touched">Введите пароль</p>
+                <label for="password2" class="sr-only">Пароль ещё раз</label>
+                <input type="password" id="password2" formControlName="password2"
+                       class="form-control" placeholder="Пароль ещё раз" required>
+                <p class="bg-danger" *ngIf="passwordFormGroup.controls.password2.errors?.required && passwordFormGroup.controls.password2.touched">Введите пароль еще раз</p>
+                <p class="bg-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Пароли не совпадают</p>
+              </div>
+              <br />
+              <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registrationFormGroup.valid"  >Зарегистрироваться</button>
+              <br />
+              <a routerLink="/login">У меня уже есть аккаунт</a>
+            </form>
+
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </div>
+</main>
+<!--Main layout-->
