@@ -22,10 +22,7 @@ export class AuthService {
 
 
   authenticate(user: User) {
-
-    debugger;
     let url = this.authUrl + "/oauth/token";
-
     const body = new URLSearchParams();
     body.set('username', user.username);
     body.set('password', user.password);
@@ -59,7 +56,6 @@ export class AuthService {
   }
 
   private refreshAuthData() {
-    debugger;
     let user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       this.user = user["userName"];
@@ -114,8 +110,6 @@ export class AuthService {
     return this.http.put<ResponseBoolean>(url, JSON.stringify(newUser), {
       headers: headers
     });
-
-
 
   }
 }

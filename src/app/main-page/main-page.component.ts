@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DeskService} from "../services/desk.service";
+import {Desk} from "../objects/Desk";
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private deskService: DeskService) { }
+
+  desks:Desk[];
 
   ngOnInit() {
+    this.desks = [];
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      user = user["userName"];
+    }
+
+    this.deskService.getDefaultDesks(user).subscribe(desks => {
+      this.desks = desks;
+    });
   }
+
 
 }

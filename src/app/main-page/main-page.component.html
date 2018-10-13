@@ -1,3 +1,17 @@
-<p>
-  main-page works!
-</p>
+<div class="main-desks">
+  <div *ngFor="let desk of desks" class="desk-block">
+    <div class="desk-header">
+      <div class="left">
+        <h2>{{desk.title}}</h2>
+      </div>
+      <div class="center">
+        <div class="review">
+        </div>
+        <div class="review-label">Review</div>
+      </div>
+      <div class="right"></div>
+    </div>
+    <div class="desk-state">
+    </div>
+  </div>
+</div>

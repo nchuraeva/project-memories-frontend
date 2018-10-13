@@ -10,7 +10,6 @@ export class AuthServiceGuard implements CanActivate {
   }
 
   canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot):boolean {
-    debugger;
     if (this.authService.isAuth()) {
       return true;
     }
