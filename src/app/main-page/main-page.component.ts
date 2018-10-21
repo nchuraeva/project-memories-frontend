@@ -25,5 +25,8 @@ export class MainPageComponent implements OnInit {
     });
   }
 
+  onAdd(id:number) {
+    console.log(id);
+  }
 
 }

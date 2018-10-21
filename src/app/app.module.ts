@@ -17,6 +17,8 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ContentComponent } from './content/content.component';
 import {DeskService} from "./services/desk.service";
 import {RegistrationComponent} from "./registration/registration.component";
+import { WaitTimerComponent } from './wait-timer/wait-timer.component';
+import { SquareButtonComponent } from './square-button/square-button.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {RegistrationComponent} from "./registration/registration.component";
     LoginComponent,
     RegistrationComponent,
     MainPageComponent,
-    ContentComponent
+    ContentComponent,
+    WaitTimerComponent,
+    SquareButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -21,19 +21,15 @@ $border: 1px solid silver;
       width: 30%;
     }
     .center {
-      .review {
-        width: 80px;
-        height: 70px;
-        background-color: #fff;
-      }
-      .review-label {
-        text-align:center;
-        line-height: 20px;
-        color: #fff;
-      }
+      width: 40%;
+      display: flex;
+      align-items: center;
     }
     .right {
       width: 30%;
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
     }
     .desk-state {
       height: 170px;

@@ -5,11 +5,12 @@
         <h2>{{desk.title}}</h2>
       </div>
       <div class="center">
-        <div class="review">
-        </div>
-        <div class="review-label">Review</div>
+        <square-button>Review</square-button>
+       <!-- <wait-timer></wait-timer>-->
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <square-button (click)="onAdd(desk.id)">Add</square-button>
+      </div>
     </div>
     <div class="desk-state">
     </div>
